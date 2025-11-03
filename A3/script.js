@@ -1,25 +1,26 @@
 function validate(e) {
   e.preventDefault();
 
-  const email = document.getElementById("email").Value;
-  const pass = document.getElementById("password").Value;
-  const age = document.getElementById("age").Value;
+  const email = document.getElementById("email").value.trim();
+  const pass = document.getElementById("password").value.trim();
+  const age = parseInt(document.getElementById("age").value.trim());
   const msgBox = document.getElementById("message");
 
-  let message = " ";
+  let message = "";
+  msgBox.style.color = "red";
 
-  if (email === " ") {
-    message = "please enter an email";
-    msgBox.style.color = "red";
-  } else if (pass === " ") {
-    message = "Password must be atleast 8 characters.";
-    msgBox.style.color = "red";
-  } else if (age === " ") {
+  if (!email) {
+    message = "Please enter an email.";
+  } else if (!pass) {
+    message = "Please enter a password.";
+  } else if (pass.length < 8) {
+    message = "Password must be at least 8 characters.";
+  } else if (isNaN(age)) {
+    message = "Please enter your age.";
+  } else if (age < 12 || age > 50) {
     message = "Age must be between 12 and 50.";
-    msgBox.style.color = "red";
-  }
-  else {
-    message = "Login Successful";
+  } else {
+    message = "Login Successful!";
     msgBox.style.color = "green";
   }
 
